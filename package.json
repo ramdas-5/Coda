@@ -8,13 +8,13 @@
     "vercel-build": "echo 'Building...'"
   },
   "dependencies": {
-  "bcryptjs": "^2.4.3",
-  "connect-mongo": "^5.0.0",
-  "dotenv": "^16.3.1",
-  "express": "^4.18.2",
-  "express-session": "^1.17.3",
-  "mongoose": "^8.0.3"
-},
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "^5.0.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "mongoose": "^8.0.3"
+  },
   "devDependencies": {
     "nodemon": "^3.0.2"
   }
