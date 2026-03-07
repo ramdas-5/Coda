@@ -1,6 +1,6 @@
-// routes/auth.js (full file after fix)
+// routes/auth.js
 const express = require('express');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs'); // Change from 'bcrypt' to 'bcryptjs'
 const User = require('../models/User');
 const authMiddleware = require('../middleware/auth');
 
@@ -17,7 +17,7 @@ router.post('/signup', async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ error: 'Email already exists' });
     }
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10); // Same API
     const user = new User({ email, password: hashedPassword });
     await user.save();
     req.session.userId = user._id;
@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
     if (!user) {
       return res.status(401).json({ error: "You don't have an account. Please sign up." });
     }
-    const match = await bcrypt.compare(password, user.password);
+    const match = await bcrypt.compare(password, user.password); // Same API
     if (!match) {
       return res.status(401).json({ error: 'Incorrect password' });
     }
