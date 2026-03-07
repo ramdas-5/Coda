@@ -11,6 +11,13 @@ const taskRoutes = require('./routes/tasks');
 
 const app = express();
 
+// Optional: Enable CORS if needed for production
+// const cors = require('cors');
+// app.use(cors({
+//   origin: ['https://your-vercel-app.vercel.app'], // Replace with your actual Vercel URL
+//   credentials: true
+// }));
+
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
@@ -48,5 +55,11 @@ app.get('/signup', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'signup.html'));
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// For local development: start the server
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
+
+// Export the app for Vercel serverless deployment
+module.exports = app;
