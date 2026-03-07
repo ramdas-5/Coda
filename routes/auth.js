@@ -1,4 +1,4 @@
-// routes/auth.js
+// routes/auth.js (full file after fix)
 const express = require('express');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
@@ -37,11 +37,11 @@ router.post('/login', async (req, res) => {
     }
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      return res.status(401).json({ error: "You don't have an account. Please sign up." });
     }
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      return res.status(401).json({ error: 'Incorrect password' });
     }
     req.session.userId = user._id;
     res.json({ message: 'Logged in', userId: user._id });
@@ -63,8 +63,17 @@ router.post('/logout', (req, res) => {
 });
 
 // Check session
-router.get('/me', authMiddleware, (req, res) => {
-  res.json({ userId: req.session.userId });
+router.get('/me', authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.session.userId).select('email');
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    res.json({ userId: user._id, email: user.email });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
 module.exports = router;

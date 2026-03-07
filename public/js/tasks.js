@@ -1,4 +1,4 @@
-// public/js/tasks.js (full file after fix)
+// public/js/tasks.js
 document.addEventListener('DOMContentLoaded', () => {
   const taskListContainer = document.getElementById('taskListContainer');
   const sortOrderSelect = document.getElementById('sortOrder');
@@ -7,8 +7,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const cancelModalBtn = document.querySelector('.cancel');
   const editTaskForm = document.getElementById('editTaskForm');
   const deleteTaskBtn = document.getElementById('deleteTaskBtn');
+  const confirmModal = document.getElementById('confirmModal');
+  const confirmMessage = document.getElementById('confirmMessage');
+  const confirmCancel = document.getElementById('confirmCancel');
+  const confirmDelete = document.getElementById('confirmDelete');
+  let confirmCallback = null;
 
   let currentEditTaskId = null;
+
+  // Confirmation modal functions
+  function showConfirmModal(message, onConfirm) {
+    confirmMessage.textContent = message;
+    confirmCallback = onConfirm;
+    confirmModal.style.display = 'block';
+  }
+
+  confirmCancel.addEventListener('click', () => {
+    confirmModal.style.display = 'none';
+    confirmCallback = null;
+  });
+
+  confirmDelete.addEventListener('click', () => {
+    if (confirmCallback) {
+      confirmCallback();
+    }
+    confirmModal.style.display = 'none';
+    confirmCallback = null;
+  });
+
+  confirmModal.addEventListener('click', (e) => {
+    if (e.target === confirmModal) {
+      confirmModal.style.display = 'none';
+      confirmCallback = null;
+    }
+  });
 
   loadTasks('desc');
 
@@ -24,9 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
         displayTasks(tasks);
       } else {
         taskListContainer.innerHTML = '<p>Error loading tasks</p>';
+        showPopup('Error loading tasks', 'error');
       }
     } catch (err) {
       taskListContainer.innerHTML = '<p>Network error</p>';
+      showPopup('Network error', 'error');
     }
   }
 
@@ -89,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       modal.style.display = 'block';
     } catch (err) {
-      alert('Error loading task');
+      showPopup('Error loading task', 'error');
     }
   }
 
@@ -139,28 +173,33 @@ document.addEventListener('DOMContentLoaded', () => {
       if (res.ok) {
         modal.style.display = 'none';
         loadTasks(sortOrderSelect.value);
+        showPopup('Task updated successfully', 'success');
       } else {
-        alert('Error updating task');
+        const data = await res.json();
+        showPopup(data.error || 'Error updating task', 'error');
       }
     } catch (err) {
-      alert('Network error');
+      showPopup('Network error', 'error');
     }
   });
 
-  deleteTaskBtn.addEventListener('click', async () => {
+  deleteTaskBtn.addEventListener('click', () => {
     if (!currentEditTaskId) return;
-    if (!confirm('Delete task?')) return;
-    try {
-      const res = await fetch(`/api/tasks/${currentEditTaskId}`, { method: 'DELETE' });
-      if (res.ok) {
-        modal.style.display = 'none';
-        loadTasks(sortOrderSelect.value);
-      } else {
-        alert('Error deleting task');
+    showConfirmModal('Are you sure you want to delete this task?', async () => {
+      try {
+        const res = await fetch(`/api/tasks/${currentEditTaskId}`, { method: 'DELETE' });
+        if (res.ok) {
+          modal.style.display = 'none';
+          loadTasks(sortOrderSelect.value);
+          showPopup('Task deleted successfully', 'success');
+        } else {
+          const data = await res.json();
+          showPopup(data.error || 'Error deleting task', 'error');
+        }
+      } catch (err) {
+        showPopup('Network error', 'error');
       }
-    } catch (err) {
-      alert('Network error');
-    }
+    });
   });
 
   // Close modal

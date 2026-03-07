@@ -1,74 +1,99 @@
-<!-- public/tasks.html (full file after fix) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coda - Task List</title>
+  <title>Coda · Tasks</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <nav>
-    <div class="nav-brand">Coda</div>
-    <ul>
-      <li><a href="/">Calendar</a></li>
-      <li><a href="/tasks" class="active">Task List</a></li>
-      <li><button id="logoutBtn">Logout</button></li>
-    </ul>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">Coda</div>
+      <ul class="nav-menu">
+        <li><a href="/">Calendar</a></li>
+        <li><a href="/tasks" class="active">Tasks</a></li>
+        <li class="profile-container">
+          <div class="profile-icon" id="profileIcon"><i class="fas fa-user-circle"></i></div>
+          <div class="dropdown-menu" id="dropdownMenu">
+            <div class="user-email" id="userEmail">Loading...</div>
+            <button id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+          </div>
+        </li>
+      </ul>
+    </div>
   </nav>
-  <main>
-    <h1>All Tasks</h1>
+
+  <main class="container">
+    <h1 class="page-title">All Tasks</h1>
     <div class="sort-controls">
-      <label>Sort by date:</label>
+      <label for="sortOrder">Sort by:</label>
       <select id="sortOrder">
-        <option value="desc">New to Old</option>
-        <option value="asc">Old to New</option>
+        <option value="desc">Newest first</option>
+        <option value="asc">Oldest first</option>
       </select>
     </div>
-    <div id="taskListContainer"></div>
+    <div id="taskListContainer" class="task-grid"></div>
   </main>
-  <!-- Task edit modal -->
-  <div id="taskModal" class="modal" style="display: none;">
-    <div class="modal-content">
+
+  <!-- Edit Modal -->
+  <div id="taskModal" class="modal">
+    <div class="modal-content glass">
       <span class="close">&times;</span>
-      <h3>Edit Task</h3>
+      <h3><i class="fas fa-edit"></i> Edit Task</h3>
       <form id="editTaskForm">
         <input type="hidden" id="editTaskId" value="">
         <div class="form-group">
-          <label for="editTaskName">Task Name</label>
+          <label for="editTaskName">Task name</label>
           <input type="text" id="editTaskName" required>
         </div>
         <div class="form-group">
-          <label for="editTaskDetails">Task Details</label>
+          <label for="editTaskDetails">Description</label>
           <textarea id="editTaskDetails" rows="3"></textarea>
         </div>
         <div class="form-group">
           <label for="editTaskDate">Date</label>
           <input type="date" id="editTaskDate" required>
         </div>
-        <!-- Time input removed -->
         <div class="form-group checkbox">
-          <label>
-            <input type="checkbox" id="editDailyReminder"> Daily Reminder
+          <label class="checkbox-label">
+            <input type="checkbox" id="editDailyReminder">
+            <span class="checkbox-custom"></span>
+            Daily reminder
           </label>
         </div>
-        <div id="editReminderOptions" style="display: none;">
-          <div class="form-group">
-            <label>
-              <input type="radio" name="editReminderType" value="everyday" checked> Apply Every Day
+        <div id="editReminderOptions" class="reminder-options" style="display: none;">
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="editReminderType" value="everyday" checked>
+              <span class="radio-custom"></span>
+              Every day
             </label>
-            <label>
-              <input type="radio" name="editReminderType" value="specific"> Specific Days
+            <label class="radio-label">
+              <input type="radio" name="editReminderType" value="specific">
+              <span class="radio-custom"></span>
+              Specific days
             </label>
           </div>
-          <div id="editSpecificDays" style="display: none;">
-            <label><input type="checkbox" value="Monday"> Monday</label>
-            <label><input type="checkbox" value="Tuesday"> Tuesday</label>
-            <label><input type="checkbox" value="Wednesday"> Wednesday</label>
-            <label><input type="checkbox" value="Thursday"> Thursday</label>
-            <label><input type="checkbox" value="Friday"> Friday</label>
-            <label><input type="checkbox" value="Saturday"> Saturday</label>
-            <label><input type="checkbox" value="Sunday"> Sunday</label>
+          <div id="editSpecificDays" class="specific-days" style="display: none;">
+            <input type="checkbox" id="editDayMon" value="Monday">
+            <label for="editDayMon">Mon</label>
+            <input type="checkbox" id="editDayTue" value="Tuesday">
+            <label for="editDayTue">Tue</label>
+            <input type="checkbox" id="editDayWed" value="Wednesday">
+            <label for="editDayWed">Wed</label>
+            <input type="checkbox" id="editDayThu" value="Thursday">
+            <label for="editDayThu">Thu</label>
+            <input type="checkbox" id="editDayFri" value="Friday">
+            <label for="editDayFri">Fri</label>
+            <input type="checkbox" id="editDaySat" value="Saturday">
+            <label for="editDaySat">Sat</label>
+            <input type="checkbox" id="editDaySun" value="Sunday">
+            <label for="editDaySun">Sun</label>
           </div>
         </div>
         <div class="form-group">
@@ -78,13 +103,79 @@
             <option value="Done">Done</option>
           </select>
         </div>
-        <button type="submit">Update Task</button>
-        <button type="button" id="deleteTaskBtn">Delete</button>
-        <button type="button" class="cancel">Cancel</button>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Update Task</button>
+          <button type="button" id="deleteTaskBtn" class="btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+          <button type="button" class="btn-secondary cancel">Cancel</button>
+        </div>
       </form>
     </div>
   </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="confirmModal" class="modal confirm-modal">
+    <div class="modal-content glass">
+      <h3><i class="fas fa-exclamation-triangle"></i> Confirm Deletion</h3>
+      <p id="confirmMessage">Are you sure you want to delete this task?</p>
+      <div class="modal-actions">
+        <button id="confirmCancel" class="btn-secondary">Cancel</button>
+        <button id="confirmDelete" class="btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <span class="footer-brand">Coda</span>
+        <span class="footer-tagline">Organize your tasks smarter.</span>
+      </div>
+      <div class="footer-section">
+        <span class="footer-credit">Developed by Ramdas Hembram</span>
+      </div>
+      <div class="footer-section">
+        <a href="#" class="footer-link"><i class="fab fa-github"></i></a>
+        <a href="#" class="footer-link"><i class="fab fa-linkedin"></i></a>
+        <a href="#" class="footer-link"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Popup container for toast notifications -->
+  <div id="popup-container"></div>
+
   <script src="/js/auth.js"></script>
   <script src="/js/tasks.js"></script>
+  <script>
+    (function() {
+      const profileIcon = document.getElementById('profileIcon');
+      const dropdown = document.getElementById('dropdownMenu');
+      const userEmailSpan = document.getElementById('userEmail');
+      let isClickedOpen = false;
+
+      fetch('/api/auth/me')
+        .then(res => res.ok ? res.json() : Promise.reject())
+        .then(data => { userEmailSpan.textContent = data.email; })
+        .catch(() => { userEmailSpan.textContent = 'Not logged in'; });
+
+      profileIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        isClickedOpen = !isClickedOpen;
+        dropdown.classList.toggle('show', isClickedOpen);
+      });
+
+      profileIcon.addEventListener('mouseenter', () => { if (!isClickedOpen) dropdown.classList.add('show'); });
+      profileIcon.addEventListener('mouseleave', () => { if (!isClickedOpen) dropdown.classList.remove('show'); });
+      dropdown.addEventListener('mouseenter', () => { if (!isClickedOpen) dropdown.classList.add('show'); });
+      dropdown.addEventListener('mouseleave', () => { if (!isClickedOpen) dropdown.classList.remove('show'); });
+      document.addEventListener('click', (e) => {
+        if (!profileIcon.contains(e.target) && !dropdown.contains(e.target)) {
+          dropdown.classList.remove('show');
+          isClickedOpen = false;
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

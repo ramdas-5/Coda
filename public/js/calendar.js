@@ -1,4 +1,4 @@
-// public/js/calendar.js (full file after fix)
+// public/js/calendar.js
 document.addEventListener('DOMContentLoaded', () => {
   const monthYearDisplay = document.getElementById('monthYearDisplay');
   const calendarGrid = document.getElementById('calendarGrid');
@@ -18,14 +18,47 @@ document.addEventListener('DOMContentLoaded', () => {
   const taskStatusSelect = document.getElementById('taskStatus');
   const cancelTaskBtn = document.getElementById('cancelTask');
   const tasksForDateDiv = document.getElementById('tasksForDate');
+  const confirmModal = document.getElementById('confirmModal');
+  const confirmMessage = document.getElementById('confirmMessage');
+  const confirmCancel = document.getElementById('confirmCancel');
+  const confirmDelete = document.getElementById('confirmDelete');
+  let confirmCallback = null;
 
   let currentDate = new Date();
   let currentYear = currentDate.getFullYear();
   let currentMonth = currentDate.getMonth(); // 0-11
   let tasks = []; // tasks for current month
+  let selectedCell = null; // currently selected calendar cell
 
   // Initialize calendar
   renderCalendar();
+
+  // Confirmation modal functions
+  function showConfirmModal(message, onConfirm) {
+    confirmMessage.textContent = message;
+    confirmCallback = onConfirm;
+    confirmModal.style.display = 'block';
+  }
+
+  confirmCancel.addEventListener('click', () => {
+    confirmModal.style.display = 'none';
+    confirmCallback = null;
+  });
+
+  confirmDelete.addEventListener('click', () => {
+    if (confirmCallback) {
+      confirmCallback();
+    }
+    confirmModal.style.display = 'none';
+    confirmCallback = null;
+  });
+
+  confirmModal.addEventListener('click', (e) => {
+    if (e.target === confirmModal) {
+      confirmModal.style.display = 'none';
+      confirmCallback = null;
+    }
+  });
 
   // Event listeners
   prevMonthBtn.addEventListener('click', () => {
@@ -34,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
       currentMonth = 11;
       currentYear--;
     }
+    selectedCell = null; // clear selection when month changes
     renderCalendar();
   });
 
@@ -43,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
       currentMonth = 0;
       currentYear++;
     }
+    selectedCell = null; // clear selection when month changes
     renderCalendar();
   });
 
@@ -69,14 +104,11 @@ document.addEventListener('DOMContentLoaded', () => {
       status: taskStatusSelect.value
     };
 
-    // If creating a new task, set time to current time
     const taskId = taskIdInput.value;
     if (!taskId) {
-      // Get current time in HH:MM AM/PM format (or 24h)
       const now = new Date();
       taskData.time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
-    // For edits, do NOT include time, so existing time remains
 
     if (dailyReminderCheck.checked) {
       const reminderType = document.querySelector('input[name="reminderType"]:checked').value;
@@ -107,13 +139,19 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       if (res.ok) {
         resetTaskForm();
-        await renderCalendar(); // refresh tasks
-        await loadTasksForDate(date); // reload right panel
+        await renderCalendar();
+        await loadTasksForDate(date);
+        if (taskId) {
+          showPopup('Task updated successfully', 'success');
+        } else {
+          showPopup('Task created successfully', 'success');
+        }
       } else {
-        alert('Error saving task');
+        const data = await res.json();
+        showPopup(data.error || 'Error saving task', 'error');
       }
     } catch (err) {
-      alert('Network error');
+      showPopup('Network error', 'error');
     }
   });
 
@@ -123,7 +161,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   async function renderCalendar() {
-    // Fix: use currentYear and currentMonth to display month and year
     monthYearDisplay.textContent = new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long' }) + ' ' + currentYear;
     await fetchTasksForMonth();
     buildCalendar();
@@ -164,12 +201,21 @@ document.addEventListener('DOMContentLoaded', () => {
       calendarGrid.appendChild(emptyCell);
     }
 
+    // Compute today's date string (local)
+    const today = new Date();
+    const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
     // Add days of month
     for (let d = 1; d <= daysInMonth; d++) {
       const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
       const cell = document.createElement('div');
       cell.className = 'calendar-day';
       cell.dataset.date = dateStr;
+
+      // Highlight today if it's this cell
+      if (dateStr === todayStr) {
+        cell.classList.add('today');
+      }
 
       // Day number
       const dayNumber = document.createElement('div');
@@ -185,10 +231,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (tasksForDay.length > 0) {
         cell.classList.add('highlighted');
-        // Show first task name on hover
         cell.title = tasksForDay.map(t => t.taskName).join(' • ');
 
-        // Add mini indicators (for visual)
         tasksForDay.forEach(task => {
           const indicator = document.createElement('div');
           indicator.className = `task-indicator ${task.status === 'Done' ? 'done' : ''}`;
@@ -199,8 +243,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Hover popup
       cell.addEventListener('mouseenter', (e) => {
-        // Show "Add Task" tooltip only if no tasks? Requirement: hover on a date → show popup "Add Task"
-        // We'll use a simple title for now
         if (!cell.title) {
           cell.title = 'Add Task';
         }
@@ -208,6 +250,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
       cell.addEventListener('click', () => {
         openTaskPanel(dateStr);
+        // Handle selected date highlight
+        if (selectedCell) {
+          selectedCell.classList.remove('selected');
+        }
+        cell.classList.add('selected');
+        selectedCell = cell;
       });
 
       calendarGrid.appendChild(cell);
@@ -257,7 +305,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     tasksForDateDiv.innerHTML = html;
 
-    // Attach event listeners to edit/delete buttons
     tasksForDateDiv.querySelectorAll('.edit-task').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -268,13 +315,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     tasksForDateDiv.querySelectorAll('.delete-task').forEach(btn => {
-      btn.addEventListener('click', async (e) => {
+      btn.addEventListener('click', (e) => {
         e.stopPropagation();
         const taskDiv = btn.closest('.task-item');
         const taskId = taskDiv.dataset.taskId;
-        if (confirm('Delete task?')) {
+        showConfirmModal('Are you sure you want to delete this task?', async () => {
           await deleteTask(taskId);
-        }
+        });
       });
     });
   }
@@ -284,7 +331,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch(`/api/tasks/${taskId}`);
       if (!res.ok) throw new Error();
       const task = await res.json();
-      // Populate form
       taskIdInput.value = task._id;
       taskNameInput.value = task.taskName;
       taskDetailsInput.value = task.taskDetails || '';
@@ -296,20 +342,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const reminderType = task.reminderType || 'everyday';
         document.querySelector(`input[name="reminderType"][value="${reminderType}"]`).checked = true;
         specificDaysDiv.style.display = reminderType === 'specific' ? 'block' : 'none';
-        // set specific days checkboxes
         const specificCheckboxes = specificDaysDiv.querySelectorAll('input[type="checkbox"]');
         specificCheckboxes.forEach(cb => {
           cb.checked = task.specificDays.includes(cb.value);
         });
       } else {
-        // reset reminder options
         document.querySelector('input[name="reminderType"][value="everyday"]').checked = true;
         specificDaysDiv.style.display = 'none';
         const specificCheckboxes = specificDaysDiv.querySelectorAll('input[type="checkbox"]');
         specificCheckboxes.forEach(cb => cb.checked = false);
       }
     } catch (err) {
-      alert('Error loading task');
+      showPopup('Error loading task', 'error');
     }
   }
 
@@ -320,11 +364,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const date = selectedDateInput.value;
         await renderCalendar();
         await loadTasksForDate(date);
+        showPopup('Task deleted successfully', 'success');
       } else {
-        alert('Error deleting task');
+        showPopup('Error deleting task', 'error');
       }
     } catch (err) {
-      alert('Network error');
+      showPopup('Network error', 'error');
     }
   }
 

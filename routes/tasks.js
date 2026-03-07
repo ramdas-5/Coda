@@ -7,19 +7,19 @@ const router = express.Router();
 
 // Helper function to check if a task recurs on a given date
 function taskRecursOnDate(task, date) {
-  // Convert both to UTC date strings for comparison
   const taskDate = new Date(task.date);
   taskDate.setUTCHours(0, 0, 0, 0);
   const checkDate = new Date(date);
   checkDate.setUTCHours(0, 0, 0, 0);
 
-  // If date is before task's original date, it doesn't recur
+  // Always include the exact original date (even if task is done)
+  if (checkDate.getTime() === taskDate.getTime()) return true;
+
+  // If date is before task's original date, it doesn't recur (except exact match already handled)
   if (checkDate < taskDate) return false;
 
-  // If not a daily reminder, only original date matches
-  if (!task.dailyReminder) {
-    return checkDate.getTime() === taskDate.getTime();
-  }
+  // If not a daily reminder, only original date matches (already handled)
+  if (!task.dailyReminder) return false;
 
   // Daily reminder logic
   if (task.reminderType === 'everyday') {

@@ -80,3 +80,56 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   }
 });
+
+// ... existing auth.js code ...
+
+// Global popup notification system
+window.showPopup = function(message, type = 'success') {
+  const container = document.getElementById('popup-container');
+  if (!container) return;
+
+  const popup = document.createElement('div');
+  popup.className = `popup ${type}`;
+
+  // Icon based on type
+  let icon = '✅';
+  if (type === 'error') icon = '❌';
+  else if (type === 'warning') icon = '⚠️';
+
+  popup.innerHTML = `
+    <div class="popup-content">
+      <span class="popup-icon">${icon}</span>
+      <span class="popup-message">${message}</span>
+    </div>
+    <button class="popup-close">&times;</button>
+  `;
+
+  // Close button
+  const closeBtn = popup.querySelector('.popup-close');
+  closeBtn.addEventListener('click', () => {
+    popup.classList.add('fade-out');
+    setTimeout(() => popup.remove(), 300);
+  });
+
+  // Auto-dismiss after 3 seconds
+  const timeout = setTimeout(() => {
+    if (popup.parentNode) {
+      popup.classList.add('fade-out');
+      setTimeout(() => popup.remove(), 300);
+    }
+  }, 3000);
+
+  // Prevent auto-dismiss if hovering
+  popup.addEventListener('mouseenter', () => clearTimeout(timeout));
+  popup.addEventListener('mouseleave', () => {
+    const newTimeout = setTimeout(() => {
+      if (popup.parentNode) {
+        popup.classList.add('fade-out');
+        setTimeout(() => popup.remove(), 300);
+      }
+    }, 3000);
+    popup.dataset.timeout = newTimeout;
+  });
+
+  container.appendChild(popup);
+};
