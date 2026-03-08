@@ -1,269 +1,260 @@
 <div align="center">
 
-<!-- ANIMATED GRADIENT TITLE -->
-<h1 style="font-size: 4rem; font-weight: 800; margin: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff6b6b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: float 3s ease-in-out infinite;">📅 Coda</h1>
-<p style="font-size: 1.5rem; color: #4a5568; margin-top: 0.5rem;">Where calendar meets tasks – beautifully.</p>
+# 📅 CODA  
+### *Where calendar meets tasks — beautifully.*
 
-<!-- BADGES WITH HOVER ANIMATIONS -->
-<p style="margin: 1.5rem 0;">
-  <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-20.x-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" style="transition: transform 0.2s; margin: 0 5px;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"></a>
-  <a href="https://expressjs.com/"><img src="https://img.shields.io/badge/Express.js-4.18-000000?style=for-the-badge&logo=express&logoColor=white" style="transition: transform 0.2s; margin: 0 5px;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"></a>
-  <a href="https://www.mongodb.com/cloud/atlas"><img src="https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white" style="transition: transform 0.2s; margin: 0 5px;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"></a>
-  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" style="transition: transform 0.2s; margin: 0 5px;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"></a>
-  <a href="#contributing"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=for-the-badge" style="transition: transform 0.2s; margin: 0 5px;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"></a>
+<!-- BADGES WITH ICONS -->
+<p>
+  <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-20.x-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js"></a>
+  <a href="https://expressjs.com/"><img src="https://img.shields.io/badge/Express.js-4.18-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js"></a>
+  <a href="https://www.mongodb.com/cloud/atlas"><img src="https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB Atlas"></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="MIT License"></a>
+  <a href="#contributing"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=for-the-badge" alt="PRs Welcome"></a>
 </p>
 
-<!-- HERO IMAGE WITH GLASSMORPHISM CARD -->
-<div style="display: inline-block; border-radius: 24px; padding: 8px; background: linear-gradient(145deg, #667eea, #764ba2); box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3); margin: 2rem auto; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
-  <img src="./screenshots/preview.png" alt="Coda App Preview" width="800" style="border-radius: 20px; display: block; max-width: 100%;">
+<!-- HERO CARD WITH GLASS EFFECT -->
+<div style="display: inline-block; border-radius: 32px; padding: 8px; background: linear-gradient(145deg, #4f46e5, #7e22ce); box-shadow: 0 30px 50px rgba(79,70,229,0.3); margin: 2rem auto; transition: transform 0.2s ease-in-out;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+  <div style="background: #ffffff; border-radius: 24px; padding: 1.5rem;">
+    <img src="https://placehold.co/1000x520/4f46e5/white?text=Coda+App+Preview&font=montserrat" alt="Coda Preview" width="900" style="border-radius: 20px; display: block; max-width: 100%;">
+  </div>
 </div>
-<p style="font-size: 1.2rem; color: #4a5568;"><em>⚡ Visualize and manage your tasks directly from the calendar</em></p>
+<p style="font-size: 1.2rem; color: #334155;"><em>⚡ Visualize and manage your tasks directly from the calendar</em></p>
 
 </div>
 
 ---
 
-<!-- FEATURES SECTION WITH CARD ANIMATIONS -->
-<div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+## 📖 Overview
 
-<h2 style="font-size: 2.5rem; text-align: center; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">✨ Superpowers</h2>
+**Coda** is a full‑stack productivity web application that fuses a **calendar** with a **smart todo list**.  
+Create, edit, and delete tasks on specific dates, track progress (In Progress / Done), and set daily or weekday reminders.  
+Built with **Node.js**, **Express**, **MongoDB Atlas**, and vanilla **HTML/CSS/JavaScript** – it offers a sleek, modern interface with toast notifications instead of browser alerts.
 
-<div style="display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; margin: 40px 0;">
+---
 
-<!-- FEATURE CARD 1 -->
-<div style="flex: 1 1 300px; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-radius: 30px; padding: 30px 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.3); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);" onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 30px 60px rgba(102,126,234,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.1)'">
+## ✨ Key Features
+
+<div style="display: flex; flex-wrap: wrap; gap: 1.8rem; justify-content: center; margin: 3rem 0;">
+
+<!-- FEATURE CARD -->
+<div style="flex: 1 1 280px; background: #ffffff; border-radius: 2rem; padding: 2rem 1.5rem; box-shadow: 0 15px 35px -10px rgba(0,0,0,0.1); border: 1px solid #eef2f6; transition: all 0.2s;">
   <div style="font-size: 3rem; text-align: center;">📆</div>
-  <h3 style="text-align: center; font-size: 1.8rem; margin: 10px 0;">Calendar View</h3>
-  <p style="text-align: center; color: #2d3748;">Interactive monthly calendar – switch months, click any date to add tasks with smooth animations.</p>
+  <h3 style="font-size: 1.8rem; margin: 1rem 0 0.5rem; text-align: center;">Calendar View</h3>
+  <p style="color: #475569; text-align: center;">Interactive monthly calendar – switch months, click any date to add tasks instantly.</p>
 </div>
 
-<!-- FEATURE CARD 2 -->
-<div style="flex: 1 1 300px; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-radius: 30px; padding: 30px 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.3); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);" onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 30px 60px rgba(102,126,234,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.1)'">
+<div style="flex: 1 1 280px; background: #ffffff; border-radius: 2rem; padding: 2rem 1.5rem; box-shadow: 0 15px 35px -10px rgba(0,0,0,0.1); border: 1px solid #eef2f6;">
   <div style="font-size: 3rem; text-align: center;">✅</div>
-  <h3 style="text-align: center; font-size: 1.8rem; margin: 10px 0;">Task Creation</h3>
-  <p style="text-align: center; color: #2d3748;">Add tasks with name, description, and status (In Progress / Done). Edit or delete anytime.</p>
+  <h3 style="font-size: 1.8rem; margin: 1rem 0 0.5rem; text-align: center;">Full Task Control</h3>
+  <p style="color: #475569; text-align: center;">Add name, description, status. Edit or delete anytime. Everything syncs in real time.</p>
 </div>
 
-<!-- FEATURE CARD 3 -->
-<div style="flex: 1 1 300px; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-radius: 30px; padding: 30px 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.3); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);" onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 30px 60px rgba(102,126,234,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.1)'">
+<div style="flex: 1 1 280px; background: #ffffff; border-radius: 2rem; padding: 2rem 1.5rem; box-shadow: 0 15px 35px -10px rgba(0,0,0,0.1); border: 1px solid #eef2f6;">
   <div style="font-size: 3rem; text-align: center;">🔁</div>
-  <h3 style="text-align: center; font-size: 1.8rem; margin: 10px 0;">Daily Reminders</h3>
-  <p style="text-align: center; color: #2d3748;">Option to repeat tasks every day or on specific weekdays. Never miss a habit.</p>
+  <h3 style="font-size: 1.8rem; margin: 1rem 0 0.5rem; text-align: center;">Smart Reminders</h3>
+  <p style="color: #475569; text-align: center;">Repeat tasks daily or on selected weekdays. Never miss a habit or deadline.</p>
 </div>
 
-<!-- FEATURE CARD 4 -->
-<div style="flex: 1 1 300px; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-radius: 30px; padding: 30px 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.3); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);" onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 30px 60px rgba(102,126,234,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.1)'">
+<div style="flex: 1 1 280px; background: #ffffff; border-radius: 2rem; padding: 2rem 1.5rem; box-shadow: 0 15px 35px -10px rgba(0,0,0,0.1); border: 1px solid #eef2f6;">
   <div style="font-size: 3rem; text-align: center;">🔐</div>
-  <h3 style="text-align: center; font-size: 1.8rem; margin: 10px 0;">User Authentication</h3>
-  <p style="text-align: center; color: #2d3748;">Sign up, log in, and log out – secure sessions with bcryptjs. Profile dropdown included.</p>
+  <h3 style="font-size: 1.8rem; margin: 1rem 0 0.5rem; text-align: center;">Secure Authentication</h3>
+  <p style="color: #475569; text-align: center;">Sign up / log in with bcrypt‑hashed passwords. Sessions managed via express‑session.</p>
 </div>
 
-<!-- FEATURE CARD 5 -->
-<div style="flex: 1 1 300px; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-radius: 30px; padding: 30px 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.3); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);" onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 30px 60px rgba(102,126,234,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.1)'">
+<div style="flex: 1 1 280px; background: #ffffff; border-radius: 2rem; padding: 2rem 1.5rem; box-shadow: 0 15px 35px -10px rgba(0,0,0,0.1); border: 1px solid #eef2f6;">
   <div style="font-size: 3rem; text-align: center;">🧩</div>
-  <h3 style="text-align: center; font-size: 1.8rem; margin: 10px 0;">Modern UI</h3>
-  <p style="text-align: center; color: #2d3748;">Glass‑morphism, smooth hover/click animations, and fully responsive design with toast notifications.</p>
+  <h3 style="font-size: 1.8rem; margin: 1rem 0 0.5rem; text-align: center;">Modern UI/UX</h3>
+  <p style="color: #475569; text-align: center;">Glassmorphism, smooth interactions, fully responsive. Toast notifications replace old‑school alerts.</p>
 </div>
 
-<!-- FEATURE CARD 6 -->
-<div style="flex: 1 1 300px; background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-radius: 30px; padding: 30px 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.3); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);" onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 30px 60px rgba(102,126,234,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.1)'">
+<div style="flex: 1 1 280px; background: #ffffff; border-radius: 2rem; padding: 2rem 1.5rem; box-shadow: 0 15px 35px -10px rgba(0,0,0,0.1); border: 1px solid #eef2f6;">
   <div style="font-size: 3rem; text-align: center;">📋</div>
-  <h3 style="text-align: center; font-size: 1.8rem; margin: 10px 0;">Task List Page</h3>
-  <p style="text-align: center; color: #2d3748;">See all tasks sorted by date (newest/oldest). Full CRUD operations.</p>
+  <h3 style="font-size: 1.8rem; margin: 1rem 0 0.5rem; text-align: center;">Task List View</h3>
+  <p style="color: #475569; text-align: center;">See all tasks sorted by date (newest/oldest). Filter and manage with ease.</p>
 </div>
 
 </div>
 
-<!-- TECH STACK SECTION WITH ICONS -->
-<h2 style="font-size: 2.5rem; text-align: center; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-top: 60px;">⚙️ Tech Stack</h2>
+---
 
-<div align="center" style="margin: 40px 0; display: flex; flex-wrap: wrap; gap: 30px; justify-content: center;">
+## ⚙️ Technology Stack
 
-<div style="background: #f7fafc; border-radius: 50px; padding: 15px 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: all 0.2s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="40" style="margin: 0 10px;">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="40" style="margin: 0 10px;">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="40" style="margin: 0 10px;">
-  <span style="font-size: 1.3rem; font-weight: 600; margin-left: 10px;">Frontend</span>
+<div align="center" style="margin: 3rem 0; display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center;">
+
+<div style="background: #f8fafc; border-radius: 60px; padding: 0.8rem 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.03); display: inline-flex; align-items: center; gap: 15px;">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="35" height="35" alt="HTML5">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="35" height="35" alt="CSS3">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="35" height="35" alt="JavaScript">
+  <span style="font-weight: 600; font-size: 1.2rem;">Frontend</span>
 </div>
 
-<div style="background: #f7fafc; border-radius: 50px; padding: 15px 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: all 0.2s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="40" style="margin: 0 10px;">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" width="40" style="margin: 0 10px;">
-  <span style="font-size: 1.3rem; font-weight: 600; margin-left: 10px;">Backend</span>
+<div style="background: #f8fafc; border-radius: 60px; padding: 0.8rem 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.03); display: inline-flex; align-items: center; gap: 15px;">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="35" height="35" alt="Node.js">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" width="35" height="35" alt="Express">
+  <span style="font-weight: 600; font-size: 1.2rem;">Backend</span>
 </div>
 
-<div style="background: #f7fafc; border-radius: 50px; padding: 15px 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: all 0.2s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" width="40" style="margin: 0 10px;">
-  <span style="font-size: 1.3rem; font-weight: 600; margin-left: 10px;">MongoDB Atlas</span>
+<div style="background: #f8fafc; border-radius: 60px; padding: 0.8rem 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.03); display: inline-flex; align-items: center; gap: 15px;">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" width="35" height="35" alt="MongoDB">
+  <span style="font-weight: 600; font-size: 1.2rem;">MongoDB Atlas</span>
 </div>
 
-<div style="background: #f7fafc; border-radius: 50px; padding: 15px 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: all 0.2s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bcrypt/bcrypt-original.svg" width="40" style="margin: 0 10px;">
-  <span style="font-size: 1.3rem; font-weight: 600; margin-left: 10px;">bcrypt + express-session</span>
+<div style="background: #f8fafc; border-radius: 60px; padding: 0.8rem 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.03); display: inline-flex; align-items: center; gap: 15px;">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bcrypt/bcrypt-original.svg" width="35" height="35" alt="bcrypt">
+  <span style="font-weight: 600; font-size: 1.2rem;">bcrypt + express-session</span>
 </div>
 
 </div>
 
-<!-- INSTALLATION STEPS WITH GLOWING BOX -->
-<h2 style="font-size: 2.5rem; text-align: center; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🚀 Get Started in 5 Minutes</h2>
+---
 
-<div style="background: #0a192f; color: #ccd6f6; border-radius: 24px; padding: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.2); margin: 40px 0; position: relative; overflow: hidden;">
-  <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(102,126,234,0.2) 0%, transparent 70%); animation: rotate 20s linear infinite;"></div>
-  <div style="position: relative; z-index: 2;">
-    <h3 style="color: #fff; font-size: 1.8rem;">📦 Prerequisites</h3>
-    <ul style="list-style: none; padding-left: 0;">
-      <li style="margin: 10px 0;">✅ Node.js (v14+)</li>
-      <li style="margin: 10px 0;">✅ MongoDB Atlas account (free tier)</li>
-      <li style="margin: 10px 0;">✅ Git (optional)</li>
-    </ul>
+## 🚀 Quick Start Guide
 
-    <h3 style="color: #fff; font-size: 1.8rem;">🔧 Installation</h3>
-    <pre style="background: #1e2a3a; padding: 20px; border-radius: 16px; overflow-x: auto;"><code style="color: #bbd6fe;">git clone https://github.com/yourusername/coda.git
-cd coda
-npm install</code></pre>
+### Prerequisites
 
-    <h3 style="color: #fff; font-size: 1.8rem;">🌿 Environment Variables</h3>
-    <p>Create a <code style="background: #1e2a3a; padding: 2px 8px; border-radius: 8px;">.env</code> file:</p>
-    <pre style="background: #1e2a3a; padding: 20px; border-radius: 16px; overflow-x: auto;"><code style="color: #bbd6fe;">PORT=3000
-MONGODB_URI=mongodb+srv://&lt;username&gt;:&lt;password&gt;@cluster.mongodb.net/coda?retryWrites=true&w=majority
-SESSION_SECRET=your-strong-secret-key</code></pre>
+- [Node.js](https://nodejs.org/) (v14 or later)
+- [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) account (free tier)
+- Git (optional)
 
-    <h3 style="color: #fff; font-size: 1.8rem;">🎯 Run</h3>
-    <pre style="background: #1e2a3a; padding: 20px; border-radius: 16px; overflow-x: auto;"><code style="color: #bbd6fe;">npm start   # or npm run dev for nodemon</code></pre>
-    <p style="font-size: 1.2rem;">Open <a href="http://localhost:3000" style="color: #bbd6fe; text-decoration: underline;">http://localhost:3000</a> 🚀</p>
-  </div>
-</div>
+### Installation
 
-<!-- PROJECT STRUCTURE -->
-<h2 style="font-size: 2.5rem; text-align: center; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">📁 Project Structure</h2>
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/coda.git
+   cd coda
+   ```
 
-<div style="background: #f8f9fa; border-radius: 24px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); margin: 40px 0; font-family: 'Fira Code', monospace; overflow-x: auto;">
-<pre style="margin: 0;">
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**  
+   Create a `.env` file in the root:
+   ```env
+   PORT=3000
+   MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/coda?retryWrites=true&w=majority
+   SESSION_SECRET=your-strong-secret-key
+   ```
+
+4. **Configure MongoDB Atlas**  
+   - Create a cluster and database user with read/write permissions.  
+   - Add your IP to the network access list (or use `0.0.0.0/0` for development).  
+   - Paste the connection string into `MONGODB_URI`.
+
+5. **Run the application**
+   ```bash
+   npm start        # production
+   # or
+   npm run dev      # development with nodemon
+   ```
+
+6. Open [http://localhost:3000](http://localhost:3000) in your browser. 🎉
+
+---
+
+## 📁 Project Structure
+
+```
 coda/
-├── <span style="color: #2d3748;">📦 .env</span>
-├── <span style="color: #2d3748;">📦 package.json</span>
-├── <span style="color: #2d3748;">📦 server.js</span>
-├── <span style="color: #2d3748;">📁 models/</span>
-│   ├── <span style="color: #2d3748;">📄 User.js</span>
-│   └── <span style="color: #2d3748;">📄 Task.js</span>
-├── <span style="color: #2d3748;">📁 middleware/</span>
-│   └── <span style="color: #2d3748;">📄 auth.js</span>
-├── <span style="color: #2d3748;">📁 routes/</span>
-│   ├── <span style="color: #2d3748;">📄 auth.js</span>
-│   └── <span style="color: #2d3748;">📄 tasks.js</span>
-└── <span style="color: #2d3748;">📁 public/</span>
-    ├── <span style="color: #2d3748;">📄 index.html</span>
-    ├── <span style="color: #2d3748;">📄 tasks.html</span>
-    ├── <span style="color: #2d3748;">📄 login.html</span>
-    ├── <span style="color: #2d3748;">📄 signup.html</span>
-    ├── <span style="color: #2d3748;">📁 css/</span>
-    │   └── <span style="color: #2d3748;">📄 style.css</span>
-    └── <span style="color: #2d3748;">📁 js/</span>
-        ├── <span style="color: #2d3748;">📄 auth.js</span>
-        ├── <span style="color: #2d3748;">📄 calendar.js</span>
-        └── <span style="color: #2d3748;">📄 tasks.js</span>
-</pre>
+├── .env
+├── package.json
+├── server.js
+├── models/
+│   ├── User.js
+│   └── Task.js
+├── middleware/
+│   └── auth.js
+├── routes/
+│   ├── auth.js
+│   └── tasks.js
+└── public/
+    ├── index.html
+    ├── tasks.html
+    ├── login.html
+    ├── signup.html
+    ├── css/
+    │   └── style.css
+    └── js/
+        ├── auth.js
+        ├── calendar.js
+        └── tasks.js
+```
+
+---
+
+## 📸 Screenshots
+
+<div align="center" style="display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; margin: 3rem 0;">
+
+<div style="border-radius: 24px; overflow: hidden; box-shadow: 0 20px 30px rgba(0,0,0,0.1); width: 300px; background: white;">
+  <img src="https://placehold.co/600x400/4f46e5/white?text=Calendar+View&font=montserrat" width="300" height="200" style="display: block;">
+  <div style="padding: 15px; text-align: center; font-weight: 600;">📆 Calendar View</div>
 </div>
 
-<!-- SCREENSHOTS GALLERY -->
-<h2 style="font-size: 2.5rem; text-align: center; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">📸 Sneak Peek</h2>
-
-<div style="display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; margin: 50px 0;">
-  <div style="border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: all 0.3s; width: 300px;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 30px 60px rgba(102,126,234,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'">
-    <img src="./screenshots/calendar.png" alt="Calendar View" style="width: 100%; display: block;">
-    <div style="padding: 15px; text-align: center; background: white;">📆 Calendar View</div>
-  </div>
-  <div style="border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: all 0.3s; width: 300px;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 30px 60px rgba(102,126,234,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'">
-    <img src="./screenshots/add-task.png" alt="Add Task Panel" style="width: 100%; display: block;">
-    <div style="padding: 15px; text-align: center; background: white;">➕ Add Task Panel</div>
-  </div>
-  <div style="border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); transition: all 0.3s; width: 300px;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 30px 60px rgba(102,126,234,0.3)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.15)'">
-    <img src="./screenshots/task-list.png" alt="Task List" style="width: 100%; display: block;">
-    <div style="padding: 15px; text-align: center; background: white;">📋 Task List</div>
-  </div>
+<div style="border-radius: 24px; overflow: hidden; box-shadow: 0 20px 30px rgba(0,0,0,0.1); width: 300px; background: white;">
+  <img src="https://placehold.co/600x400/7e22ce/white?text=Add+Task+Panel&font=montserrat" width="300" height="200" style="display: block;">
+  <div style="padding: 15px; text-align: center; font-weight: 600;">➕ Add Task Panel</div>
 </div>
 
-<!-- FUTURE IMPROVEMENTS -->
-<h2 style="font-size: 2.5rem; text-align: center; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🔮 Roadmap</h2>
-
-<ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; font-size: 1.2rem;">
-  <li style="background: #f0f4ff; border-radius: 50px; padding: 10px 25px;">✨ Drag & drop tasks</li>
-  <li style="background: #f0f4ff; border-radius: 50px; padding: 10px 25px;">🌙 Dark / light theme</li>
-  <li style="background: #f0f4ff; border-radius: 50px; padding: 10px 25px;">📧 Email reminders</li>
-  <li style="background: #f0f4ff; border-radius: 50px; padding: 10px 25px;">👥 Share tasks</li>
-  <li style="background: #f0f4ff; border-radius: 50px; padding: 10px 25px;">📱 Mobile app (React Native)</li>
-</ul>
-
-<!-- AUTHOR SECTION WITH SOCIAL ICONS -->
-<h2 style="font-size: 2.5rem; text-align: center; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">👤 Author</h2>
-
-<div align="center" style="margin: 40px 0;">
-  <div style="display: inline-block; background: white; border-radius: 100px; padding: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
-    <div style="font-size: 5rem;">👨‍💻</div>
-    <h3 style="margin: 10px 0 5px;">Ramdas Hembram</h3>
-    <p style="color: #718096; margin-bottom: 20px;">Full‑stack developer & productivity enthusiast</p>
-    <p>
-      <a href="https://github.com/yourusername"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" style="border-radius: 20px; margin: 0 5px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"></a>
-      <a href="https://linkedin.com/in/yourprofile"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" style="border-radius: 20px; margin: 0 5px; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'"></a>
-    </p>
-    <p>📧 <a href="mailto:ramdas@example.com" style="color: #667eea;">ramdas@example.com</a></p>
-    <p style="color: #a0aec0;"><em>Built with 💙 and assistance from DeepSeek AI</em></p>
-  </div>
+<div style="border-radius: 24px; overflow: hidden; box-shadow: 0 20px 30px rgba(0,0,0,0.1); width: 300px; background: white;">
+  <img src="https://placehold.co/600x400/2563eb/white?text=Task+List&font=montserrat" width="300" height="200" style="display: block;">
+  <div style="padding: 15px; text-align: center; font-weight: 600;">📋 Task List</div>
 </div>
 
-<!-- CONTRIBUTING -->
-<h2 style="font-size: 2.5rem; text-align: center; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🤝 Contributing</h2>
-
-<div align="center" style="background: linear-gradient(145deg, #fafafa, #ffffff); border-radius: 60px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin: 30px 0;">
-  <p style="font-size: 1.3rem;">Contributions, issues, and feature requests are welcome!</p>
-  <p>Feel free to check the <a href="#">issues page</a>.</p>
-  <ol style="text-align: left; display: inline-block;">
-    <li>Fork the project</li>
-    <li>Create your feature branch (<code>git checkout -b feature/amazing</code>)</li>
-    <li>Commit your changes (<code>git commit -m 'Add some amazing'</code>)</li>
-    <li>Push to the branch (<code>git push origin feature/amazing</code>)</li>
-    <li>Open a Pull Request</li>
-  </ol>
 </div>
 
-<!-- LICENSE -->
-<h2 style="font-size: 2.5rem; text-align: center; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">📄 License</h2>
+---
 
-<div align="center" style="margin: 30px 0;">
-  <p>Distributed under the MIT License. See <a href="LICENSE">LICENSE</a> for more information.</p>
+## 🔮 Roadmap & Future Enhancements
+
+- [ ] Drag & drop tasks on calendar  
+- [ ] Dark / light theme toggle  
+- [ ] Email reminders via cron jobs  
+- [ ] Share tasks / collaborative lists  
+- [ ] Mobile app (React Native)  
+- [ ] Integration with Google Calendar  
+
+---
+
+## 👤 Author
+
+<div align="center" style="background: linear-gradient(145deg, #ffffff, #f9fafb); border-radius: 4rem; padding: 2.5rem; max-width: 500px; margin: 3rem auto; box-shadow: 0 20px 40px rgba(0,0,0,0.05);">
+
+<div style="font-size: 4rem;">👨‍💻</div>
+<h2 style="margin: 0.5rem 0 0;">Ramdas Hembram</h2>
+<p style="color: #64748b;">Full‑stack developer & productivity enthusiast</p>
+
+<p>
+  <a href="https://github.com/yourusername"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
+  <a href="https://linkedin.com/in/yourprofile"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+</p>
+<p>📧 <a href="mailto:ramdas@example.com">ramdas@example.com</a></p>
+<p><em>Built with 💙 and assistance from DeepSeek AI</em></p>
+
 </div>
 
-<!-- FOOTER WITH ANIMATED HEART -->
-<div align="center" style="margin: 60px 0 30px; font-size: 1.5rem;">
-  <p>Made with <span style="color: #ff6b6b; animation: heartbeat 1.5s ease-in-out infinite;">❤️</span> by Ramdas Hembram</p>
+---
+
+## 🤝 Contributing
+
+Contributions are what make the open‑source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project  
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)  
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)  
+4. Push to the Branch (`git push origin feature/AmazingFeature`)  
+5. Open a Pull Request  
+
+---
+
+## 📄 License
+
+Distributed under the **MIT License**. See `LICENSE` for more information.
+
+---
+
+<div align="center">
+  <p style="font-size: 1.3rem;">Made with <span style="color: #e11d48;">❤️</span> by Ramdas Hembram</p>
   <p>⭐ Star this project if you found it useful!</p>
 </div>
-
-</div>
-
-<!-- INLINE STYLES FOR ANIMATIONS -->
-<style>
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
-@keyframes heartbeat {
-  0% { transform: scale(1); }
-  25% { transform: scale(1.2); }
-  50% { transform: scale(1); }
-  75% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  background: #f9f9f9;
-}
-a {
-  text-decoration: none;
-}
-</style>
