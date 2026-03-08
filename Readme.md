@@ -100,7 +100,7 @@ Built with **Node.js**, **Express**, **MongoDB Atlas**, and vanilla **HTML/CSS/J
 </div>
 
 <div style="background: #f8fafc; border-radius: 60px; padding: 0.8rem 2rem; box-shadow: 0 5px 15px rgba(0,0,0,0.03); display: inline-flex;      align-items: center; gap: 15px;">
-  <img src="https://img.shields.io/badge/bcrypt-5.1.1-4A4A55?style=for-the-badge&logo=lock&logoColor=white" width="35" height="35" alt="bcrypt">
+  <img src="https://cdn.simpleicons.org/lock" width="35" height="35" alt="bcrypt">
   <span style="font-weight: 600; font-size: 1.2rem;">bcrypt + express-session</span>
 </div>
 
