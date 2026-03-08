@@ -12,10 +12,10 @@ function taskRecursOnDate(task, date) {
   const checkDate = new Date(date);
   checkDate.setUTCHours(0, 0, 0, 0);
 
-  // Always include the exact original date (even if task is done)
+  // Always include the exact original date
   if (checkDate.getTime() === taskDate.getTime()) return true;
 
-  // If date is before task's original date, it doesn't recur (except exact match already handled)
+  // If date is before task's original date, it doesn't recur
   if (checkDate < taskDate) return false;
 
   // If not a daily reminder, only original date matches (already handled)
@@ -94,7 +94,7 @@ router.get('/', authMiddleware, async (req, res) => {
   }
 });
 
-// Get tasks for a specific date
+// Get tasks for a specific date with computed status
 router.get('/date/:date', authMiddleware, async (req, res) => {
   try {
     const { date } = req.params;
@@ -107,7 +107,19 @@ router.get('/date/:date', authMiddleware, async (req, res) => {
     // Filter tasks that recur on this date
     const tasksForDate = allTasks.filter(task => taskRecursOnDate(task, checkDate));
 
-    res.json(tasksForDate);
+    // Compute status per date
+    const dateStr = date; // assuming YYYY-MM-DD
+    const result = tasksForDate.map(task => {
+      const taskObj = task.toObject();
+      if (task.dailyReminder) {
+        // For recurring tasks, status depends on whether this date is in completedDates
+        taskObj.status = task.completedDates && task.completedDates.includes(dateStr) ? 'Done' : 'In Progress';
+      }
+      // For non-recurring, status stays as stored
+      return taskObj;
+    });
+
+    res.json(result);
   } catch (err) {
     console.error('Error in /date/:date:', err);
     res.status(500).json({ error: 'Server error' });
@@ -158,20 +170,43 @@ router.post('/', authMiddleware, async (req, res) => {
 router.put('/:id', authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
-    const updates = req.body;
+    const { completionDate, ...updates } = req.body; // completionDate is the specific date for which status applies
 
     // Prevent userId and time from being changed
     delete updates.userId;
     delete updates.time;
 
-    const task = await Task.findOneAndUpdate(
-      { _id: id, userId: req.session.userId },
-      updates,
-      { new: true, runValidators: true }
-    );
+    const task = await Task.findOne({ _id: id, userId: req.session.userId });
     if (!task) {
       return res.status(404).json({ error: 'Task not found' });
     }
+
+    // Handle recurring task completion
+    if (task.dailyReminder && completionDate) {
+      const dateStr = completionDate;
+      if (updates.status === 'Done') {
+        // Add date to completedDates if not already there
+        if (!task.completedDates.includes(dateStr)) {
+          task.completedDates.push(dateStr);
+        }
+      } else if (updates.status === 'In Progress') {
+        // Remove date from completedDates
+        task.completedDates = task.completedDates.filter(d => d !== dateStr);
+      }
+      // Do not update the main status field for recurring tasks
+    } else {
+      // For non-recurring, update status normally
+      if (updates.status) task.status = updates.status;
+    }
+
+    // Apply other updates
+    if (updates.taskName) task.taskName = updates.taskName;
+    if (updates.taskDetails !== undefined) task.taskDetails = updates.taskDetails;
+    if (updates.dailyReminder !== undefined) task.dailyReminder = updates.dailyReminder;
+    if (updates.reminderType !== undefined) task.reminderType = updates.reminderType;
+    if (updates.specificDays !== undefined) task.specificDays = updates.specificDays;
+
+    await task.save();
     res.json(task);
   } catch (err) {
     console.error('Error in PUT /:id:', err);

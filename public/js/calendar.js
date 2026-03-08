@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const confirmCancel = document.getElementById('confirmCancel');
   const confirmDelete = document.getElementById('confirmDelete');
   let confirmCallback = null;
+  let editingDate = null; // store the date for which edit is being performed
 
   let currentDate = new Date();
   let currentYear = currentDate.getFullYear();
@@ -124,6 +125,11 @@ document.addEventListener('DOMContentLoaded', () => {
       taskData.specificDays = [];
     }
 
+    // If editing, include the specific date for which status is being changed
+    if (taskId && editingDate) {
+      taskData.completionDate = editingDate;
+    }
+
     let url = '/api/tasks';
     let method = 'POST';
     if (taskId) {
@@ -223,19 +229,83 @@ document.addEventListener('DOMContentLoaded', () => {
       dayNumber.textContent = d;
       cell.appendChild(dayNumber);
 
-      // Check for tasks on this day
+      // Check for tasks on this day (based on recurrence, but status needs per‑date computation)
       const tasksForDay = tasks.filter(task => {
         const taskDate = new Date(task.date).toISOString().split('T')[0];
-        return taskDate === dateStr;
+        // We need to check recurrence, but since tasks list already contains tasks that appear in the month,
+        // we can simply check if the task recurs on this date using the same logic.
+        // However, tasks list already filtered by the backend, so we can just check if the task's original date
+        // falls on this day? Actually the backend already includes recurring tasks, so we just need to filter
+        // by whether this date is within the recurrence.
+        // For simplicity, we can use the backend's recurrence check: we'd need the task object and the date.
+        // But since we have the tasks array, we can re‑filter by checking each task's recurrence.
+        // That would be inefficient for large numbers, but acceptable for a todo app.
+        // Better to use the backend's already filtered list? But the backend for /month returns tasks that appear
+        // in the month, but not per day. We need to know which tasks appear on which day.
+        // Since we have the full tasks array, we can use taskRecursOnDate equivalent in frontend.
+        // Let's implement a simple check.
+        // For now, we'll use the original filter (based on date) but that's wrong for recurring.
+        // We need a function similar to taskRecursOnDate in frontend.
+        // We'll implement a frontend version.
+        const taskDateObj = new Date(task.date);
+        taskDateObj.setUTCHours(0,0,0,0);
+        const checkDateObj = new Date(dateStr);
+        checkDateObj.setUTCHours(0,0,0,0);
+        if (!task.dailyReminder) {
+          return taskDateObj.getTime() === checkDateObj.getTime();
+        } else {
+          if (checkDateObj < taskDateObj) return false;
+          if (task.reminderType === 'everyday') return true;
+          if (task.reminderType === 'specific') {
+            const weekdays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+            const dayOfWeek = weekdays[checkDateObj.getUTCDay()];
+            return task.specificDays.includes(dayOfWeek);
+          }
+          return false;
+        }
+      }).filter(task => task); // but we already have tasks list, so we need to map.
+
+      // Instead of filtering tasks, we should iterate over tasks and check if they recur on this date.
+      // Let's rebuild tasksForDay properly.
+      const tasksOnDay = [];
+      tasks.forEach(task => {
+        const taskDateObj = new Date(task.date);
+        taskDateObj.setUTCHours(0,0,0,0);
+        const checkDateObj = new Date(dateStr);
+        checkDateObj.setUTCHours(0,0,0,0);
+        if (!task.dailyReminder) {
+          if (taskDateObj.getTime() === checkDateObj.getTime()) {
+            tasksOnDay.push(task);
+          }
+        } else {
+          if (checkDateObj < taskDateObj) return;
+          if (task.reminderType === 'everyday') {
+            tasksOnDay.push(task);
+          } else if (task.reminderType === 'specific') {
+            const weekdays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+            const dayOfWeek = weekdays[checkDateObj.getUTCDay()];
+            if (task.specificDays.includes(dayOfWeek)) {
+              tasksOnDay.push(task);
+            }
+          }
+        }
       });
 
-      if (tasksForDay.length > 0) {
+      if (tasksOnDay.length > 0) {
         cell.classList.add('highlighted');
-        cell.title = tasksForDay.map(t => t.taskName).join(' • ');
+        cell.title = tasksOnDay.map(t => t.taskName).join(' • ');
 
-        tasksForDay.forEach(task => {
+        tasksOnDay.forEach(task => {
+          // Determine if this task should be shown as done on this date
+          let isDone = false;
+          if (task.dailyReminder) {
+            // For recurring tasks, check if this date is in completedDates
+            isDone = task.completedDates && task.completedDates.includes(dateStr);
+          } else {
+            isDone = task.status === 'Done';
+          }
           const indicator = document.createElement('div');
-          indicator.className = `task-indicator ${task.status === 'Done' ? 'done' : ''}`;
+          indicator.className = `task-indicator ${isDone ? 'done' : ''}`;
           indicator.textContent = task.taskName.substring(0, 10) + (task.taskName.length > 10 ? '…' : '');
           cell.appendChild(indicator);
         });
@@ -310,7 +380,8 @@ document.addEventListener('DOMContentLoaded', () => {
         e.stopPropagation();
         const taskDiv = btn.closest('.task-item');
         const taskId = taskDiv.dataset.taskId;
-        editTask(taskId);
+        const date = selectedDateInput.value; // the date for which we are editing
+        editTask(taskId, date);
       });
     });
 
@@ -326,7 +397,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  async function editTask(taskId) {
+  async function editTask(taskId, date) {
+    editingDate = date; // store the date for this edit
     try {
       const res = await fetch(`/api/tasks/${taskId}`);
       if (!res.ok) throw new Error();
@@ -336,7 +408,12 @@ document.addEventListener('DOMContentLoaded', () => {
       taskDetailsInput.value = task.taskDetails || '';
       dailyReminderCheck.checked = task.dailyReminder;
       reminderOptions.style.display = task.dailyReminder ? 'block' : 'none';
-      taskStatusSelect.value = task.status;
+      // For recurring tasks, the displayed status should reflect the date being edited
+      if (task.dailyReminder && task.completedDates && task.completedDates.includes(date)) {
+        taskStatusSelect.value = 'Done';
+      } else {
+        taskStatusSelect.value = task.status;
+      }
 
       if (task.dailyReminder) {
         const reminderType = task.reminderType || 'everyday';
@@ -379,5 +456,6 @@ document.addEventListener('DOMContentLoaded', () => {
     reminderOptions.style.display = 'none';
     specificDaysDiv.style.display = 'none';
     document.querySelector('input[name="reminderType"][value="everyday"]').checked = true;
+    editingDate = null;
   }
 });

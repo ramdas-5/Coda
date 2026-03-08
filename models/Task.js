@@ -43,6 +43,10 @@ const taskSchema = new mongoose.Schema({
     enum: ['In Progress', 'Done'],
     default: 'In Progress'
   },
+  completedDates: {
+    type: [String], // store dates in YYYY-MM-DD format
+    default: []
+  },
   createdAt: {
     type: Date,
     default: Date.now
