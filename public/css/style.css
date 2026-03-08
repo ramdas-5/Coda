@@ -70,13 +70,22 @@ body {
 }
 
 .nav-brand {
-  font-size: 1.8rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+/* Logo styles */
+.logo {
+  height: 40px;
+  width: auto;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
 }
 
 .nav-menu {
@@ -652,6 +661,14 @@ body {
   margin: 0;
 }
 
+/* Logo in auth card */
+.auth-logo {
+  display: block;
+  margin: 0 auto 1.5rem auto;
+  height: 50px;
+  width: auto;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
@@ -1090,6 +1107,14 @@ body {
   }
   .sort-controls select {
     width: 100%;
+  }
+
+  /* Logo responsive */
+  .logo {
+    height: 35px;
+  }
+  .auth-logo {
+    height: 40px;
   }
 
   /* Footer responsive */
