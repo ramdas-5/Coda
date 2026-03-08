@@ -15,7 +15,7 @@
 <!-- HERO CARD WITH GLASS EFFECT -->
 <div style="display: inline-block; border-radius: 32px; padding: 8px; background: linear-gradient(145deg, #4f46e5, #7e22ce); box-shadow: 0 30px 50px rgba(79,70,229,0.3); margin: 2rem auto; transition: transform 0.2s ease-in-out;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
   <div style="background: #ffffff; border-radius: 24px; padding: 1.5rem;">
-    <img src="https://placehold.co/1000x520/4f46e5/white?text=Coda+App+Preview&font=montserrat" alt="Coda Preview" width="900" style="border-radius: 20px; display: block; max-width: 100%;">
+    <img src="public/assest/-git.png" alt="Coda Preview" width="900" style="border-radius: 20px; display: block; max-width: 100%;">
   </div>
 </div>
 <p style="font-size: 1.2rem; color: #334155;"><em>⚡ Visualize and manage your tasks directly from the calendar</em></p>
