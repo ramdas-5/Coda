@@ -188,17 +188,17 @@ coda/
 <div align="center" style="display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; margin: 3rem 0;">
 
 <div style="border-radius: 24px; overflow: hidden; box-shadow: 0 20px 30px rgba(0,0,0,0.1); width: 300px; background: white;">
-  <img src="https://placehold.co/600x400/4f46e5/white?text=Calendar+View&font=montserrat" width="300" height="200" style="display: block;">
+  <img src="public/assest/calender-prev.png" width="300" height="200" style="display: block;">
   <div style="padding: 15px; text-align: center; font-weight: 600;">📆 Calendar View</div>
 </div>
 
 <div style="border-radius: 24px; overflow: hidden; box-shadow: 0 20px 30px rgba(0,0,0,0.1); width: 300px; background: white;">
-  <img src="https://placehold.co/600x400/7e22ce/white?text=Add+Task+Panel&font=montserrat" width="300" height="200" style="display: block;">
+  <img src="public/assest/add-task-prev.png" width="300" height="200" style="display: block;">
   <div style="padding: 15px; text-align: center; font-weight: 600;">➕ Add Task Panel</div>
 </div>
 
 <div style="border-radius: 24px; overflow: hidden; box-shadow: 0 20px 30px rgba(0,0,0,0.1); width: 300px; background: white;">
-  <img src="https://placehold.co/600x400/2563eb/white?text=Task+List&font=montserrat" width="300" height="200" style="display: block;">
+  <img src="public/assest/task-prev.png" width="300" height="200" style="display: block;">
   <div style="padding: 15px; text-align: center; font-weight: 600;">📋 Task List</div>
 </div>
 
@@ -226,8 +226,8 @@ coda/
 <p style="color: #64748b;">Full‑stack developer & productivity enthusiast</p>
 
 <p>
-  <a href="https://github.com/yourusername"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
-  <a href="https://linkedin.com/in/yourprofile"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+  <a href="https://github.com/ramdas-5"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
+  <a href="https://linkedin.com/in/dev-raZmdas-"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
 </p>
 <p>📧 <a href="mailto:ramdas@example.com">ramdas@example.com</a></p>
 <p><em>Built with 💙 and assistance from DeepSeek AI</em></p>
