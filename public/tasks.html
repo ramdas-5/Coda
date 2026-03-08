@@ -1,0 +1,90 @@
+<!-- public/tasks.html (full file after fix) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coda - Task List</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <nav>
+    <div class="nav-brand">Coda</div>
+    <ul>
+      <li><a href="/">Calendar</a></li>
+      <li><a href="/tasks" class="active">Task List</a></li>
+      <li><button id="logoutBtn">Logout</button></li>
+    </ul>
+  </nav>
+  <main>
+    <h1>All Tasks</h1>
+    <div class="sort-controls">
+      <label>Sort by date:</label>
+      <select id="sortOrder">
+        <option value="desc">New to Old</option>
+        <option value="asc">Old to New</option>
+      </select>
+    </div>
+    <div id="taskListContainer"></div>
+  </main>
+  <!-- Task edit modal -->
+  <div id="taskModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Edit Task</h3>
+      <form id="editTaskForm">
+        <input type="hidden" id="editTaskId" value="">
+        <div class="form-group">
+          <label for="editTaskName">Task Name</label>
+          <input type="text" id="editTaskName" required>
+        </div>
+        <div class="form-group">
+          <label for="editTaskDetails">Task Details</label>
+          <textarea id="editTaskDetails" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="editTaskDate">Date</label>
+          <input type="date" id="editTaskDate" required>
+        </div>
+        <!-- Time input removed -->
+        <div class="form-group checkbox">
+          <label>
+            <input type="checkbox" id="editDailyReminder"> Daily Reminder
+          </label>
+        </div>
+        <div id="editReminderOptions" style="display: none;">
+          <div class="form-group">
+            <label>
+              <input type="radio" name="editReminderType" value="everyday" checked> Apply Every Day
+            </label>
+            <label>
+              <input type="radio" name="editReminderType" value="specific"> Specific Days
+            </label>
+          </div>
+          <div id="editSpecificDays" style="display: none;">
+            <label><input type="checkbox" value="Monday"> Monday</label>
+            <label><input type="checkbox" value="Tuesday"> Tuesday</label>
+            <label><input type="checkbox" value="Wednesday"> Wednesday</label>
+            <label><input type="checkbox" value="Thursday"> Thursday</label>
+            <label><input type="checkbox" value="Friday"> Friday</label>
+            <label><input type="checkbox" value="Saturday"> Saturday</label>
+            <label><input type="checkbox" value="Sunday"> Sunday</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="editTaskStatus">Status</label>
+          <select id="editTaskStatus">
+            <option value="In Progress">In Progress</option>
+            <option value="Done">Done</option>
+          </select>
+        </div>
+        <button type="submit">Update Task</button>
+        <button type="button" id="deleteTaskBtn">Delete</button>
+        <button type="button" class="cancel">Cancel</button>
+      </form>
+    </div>
+  </div>
+  <script src="/js/auth.js"></script>
+  <script src="/js/tasks.js"></script>
+</body>
+</html>
